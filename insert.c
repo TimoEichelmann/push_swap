@@ -1,0 +1,220 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   insert.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/09 00:18:15 by marvin            #+#    #+#             */
+/*   Updated: 2023/05/09 00:18:15 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+typedef struct stack
+{
+	int				value;
+	int				position;
+	char			*binary;
+	struct stack*	next;
+}stack_t;
+
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+// #include "push_swap.h"
+
+int	ft_atoi(const char *p)
+{
+	int	i;
+	int	result;
+	int	sign;
+
+	sign = 1;
+	result = 0;
+	i = 0;
+	while (p[i] == ' ' || p[i] == '\f' || p[i] == '\n' || p[i] == '\r'
+		|| p[i] == '\t' || p[i] == '\v')
+		i++;
+	if (p[i + 1] >= '0' && p[i + 1] <= '9' && (p[i] == '-' || p[i] == '+'))
+	{
+		if (p[i] == '-')
+			sign = -1;
+		i++;
+	}
+	else if ((p[i] == '-' || p[i] == '+') && !(p[i + 1] >= '0' && p[i] <= '9'))
+		return (0);
+	while (p[i] >= '0' && p[i] <= '9')
+	{
+		result = result * 10 + (p[i] - '0');
+		i++;
+	}
+	return (result * sign);
+}
+
+stack_t	*ft_lstlast(stack_t *lst)
+{
+	while (lst)
+	{
+		if (!lst->next)
+			return (lst);
+		lst = lst->next;
+	}
+	return (lst);
+}
+
+void	ft_lstadd_back(stack_t **lst, stack_t *new)
+{
+	stack_t	*last;
+
+	if (*lst && lst)
+	{
+		last = ft_lstlast(*lst);
+		last->next = new;
+	}
+	else
+		*lst = new;
+}
+
+void    ft_bubblesort(int **arr, int argc)
+{
+    int    i;
+    int    j;
+    int    tmp;
+
+    i = 0;
+    j = 0;
+    while (i < argc)
+    {
+        while (j < (argc - i - 1))
+        {
+            if (*(*arr + j) > *(*arr + (j + 1)))
+            {
+                tmp = *(*arr + j);
+                *(*arr + j) = *(*arr + (j + 1));
+                *(*arr + (j + 1)) = tmp;
+            }
+            j++;
+        }
+        i++;
+        j = 0;
+    }
+}
+
+int	*ft_sort(stack_t *head, int argc)
+{
+	int	*result;
+	int	i;
+
+	i = 0;
+	result = malloc(sizeof(int) * (argc - 1));
+	while (head)
+	{
+		result[i] = head->value;
+		head = head->next;
+		i++;
+	}
+	result[i] = '\0';
+	ft_bubblesort(&result, argc);
+	return (result);
+}
+
+stack_t	*ft_insert(int argc, char **argv)
+{
+    int    i;
+    stack_t *head;
+    stack_t *p;
+
+    i = 1;
+    head = NULL;
+    while (i < argc)
+    {
+        p = malloc(sizeof(stack_t));
+        p->value = ft_atoi(argv[i]);
+        p->next = NULL;
+        /*p->binary = ft_convert(p->value); */
+        ft_lstadd_back(&head, p);
+        i++;
+    }
+    return (head);
+}
+
+void ft_free(stack_t *head)
+{
+	stack_t	*p;
+	while (head)
+	{
+		p = head->next;
+		free(head);
+		head = p;
+	}
+	return;
+}
+
+static int	ft_binlen(int nb)
+{
+	int	len;
+
+	len = 0;
+	while (nb)
+	{
+		nb = nb / 2;
+		len++;
+	}
+	return (len);
+}
+
+char	*ft_convert(int	num)
+{
+	char	*result;
+	int		size;
+
+	size = ft_binlen(num);
+	result = malloc(size + 1);
+	result[size] = '\0';
+	while (num)
+	{
+		size--;
+		result[size] = (num % 2) + 48;
+		num = num / 2;
+	}
+	return (result);
+}
+
+int main(int argc, char **argv)
+{
+	stack_t *head;
+	stack_t	*p;
+	int		*sorted;
+	int		i;
+
+	i = 0;
+	head = ft_insert(argc, argv);
+	sorted = ft_sort(head, argc);
+	p = head;
+	while (p)
+	{
+		while (p->value != sorted[i])
+			i++;
+		p->position = i;
+		// p->binary = ft_convert(p->position);
+		i = 0;
+		p = p->next;
+	}
+	p = head;
+	while (p)
+	{
+		printf("%d\n", p->value);
+		p->binary = ft_convert(p->position);
+		p = p->next;
+	}
+	p = head;
+	while (p)
+	{
+		printf("%d\n", p->value);
+		printf("%d\n", p->position);
+		printf("%s\n", p->binary);
+		p = p->next;
+	}
+	free(sorted);
+	ft_free(head);
+}

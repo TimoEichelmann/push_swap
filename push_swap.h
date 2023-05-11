@@ -14,23 +14,20 @@
 # define PUSH_SWAP_H
 # include "libft/libft.h"
 
-typedef struct stack_a
+typedef struct stack
 {
-	struct stack_a* prior;
-	int value;
-	int index_current;
-	int index_goal;
-	struct stack_a* next;
-}stack_a;
+    int		value;
+	int		position;
+    char    *binary;
+    struct	stack* next;
+}stack_t;
 
-typedef struct stack_b
-{
-	struct stack_b* prior;
-	int value;
-	int index_current;
-	int index_goal;
-	struct stack_b* next;
-}stack_b;
-
+int ft_checker(int argc, char** argv);
+int	ft_digit_check(char *argv);
+int	ft_strcmp(char *s1, char *s2);
+int	ft_strlen(const char *a);
+int	ft_check_double(char **argv, char *str, int	argc);
+int	ft_isdigit(int a);
+int	ft_atoi(const char *p);
 
 #endif
