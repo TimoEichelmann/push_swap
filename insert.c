@@ -23,6 +23,21 @@ typedef struct stack
 #include <stdlib.h>
 // #include "push_swap.h"
 
+void ft_free(stack_t *head)
+{
+	stack_t	*p;
+	while (head)
+	{
+		p = head->next;
+		free(head->value);
+		free(head->position);
+		free(head->binary);
+		free(head);
+		head = p;
+	}
+	return;
+}
+
 int	ft_atoi(const char *p)
 {
 	int	i;
@@ -75,7 +90,7 @@ void	ft_lstadd_back(stack_t **lst, stack_t *new)
 		*lst = new;
 }
 
-void    ft_bubblesort(int **arr, int argc)
+int    ft_bubblesort(int **arr, int argc, int swi)
 {
     int    i;
     int    j;
@@ -92,20 +107,24 @@ void    ft_bubblesort(int **arr, int argc)
                 tmp = *(*arr + j);
                 *(*arr + j) = *(*arr + (j + 1));
                 *(*arr + (j + 1)) = tmp;
+				swi++;
             }
             j++;
         }
         i++;
         j = 0;
     }
+	return (swi);
 }
 
 int	*ft_sort(stack_t *p, int argc)
 {
 	int	*result;
 	int	i;
+	int swi;
 
 	i = 0;
+	swi = 0;
 	result = malloc(sizeof(int) * (argc - 1));
 	while (p)
 	{
@@ -113,7 +132,12 @@ int	*ft_sort(stack_t *p, int argc)
 		p = p->next;
 		i++;
 	}
-	ft_bubblesort(&result, argc);
+	swi = ft_bubblesort(&result, argc, swi);
+	if (swi == 0)
+	{
+		free (result);
+		return NULL;
+	}
 	return (result);
 }
 
@@ -145,6 +169,7 @@ char	*ft_binconvert(int	num)
 
 	pot = 1;
 	dec = 1;
+	bin = NULL;
 	while (num / pot > 1)
 	{
 		pot = pot * 2;
@@ -153,16 +178,19 @@ char	*ft_binconvert(int	num)
 	return (ft_bincalculator(num, pot, dec, bin));
 }
 
-int ft_initialize(stack_t *head, int argc)
+void ft_initialize(stack_t *head, int argc)
 {
 	stack_t	*p;
 	int		*sorted;
 	int		i;
-	int		j;
 
 	i = 0;
-	j = 0;
 	sorted = ft_sort(head, argc);
+	if (!sorted)
+	{
+		ft_free(head);
+		return ;
+	}
 	p = head;
 	while (p)
 	{
@@ -175,7 +203,9 @@ int ft_initialize(stack_t *head, int argc)
 		p = p->next;
 	}
 	free(sorted);
+	return ;
 }
+
 stack_t	*ft_insert(int argc, char **argv)
 {
     int    i;
@@ -190,30 +220,14 @@ stack_t	*ft_insert(int argc, char **argv)
 		p->value = malloc(sizeof(int));
         *p->value = ft_atoi(argv[i]);
         p->next = NULL;
-        /*p->binary = ft_convert(p->value); */
         ft_lstadd_back(&head, p);
         i++;
     }
 	ft_initialize(head, argc);
+	if (!head)
+		return NULL;
     return (head);
 }
-
-void ft_free(stack_t *head)
-{
-	stack_t	*p;
-	while (head)
-	{
-		p = head->next;
-		// free(head->value);
-		free(head->position);
-		free(head->binary);
-		free(head);
-		head = p;
-	}
-	return;
-}
-
-
 
 int main(int argc, char **argv)
 {

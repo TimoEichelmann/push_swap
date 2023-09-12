@@ -60,12 +60,31 @@
 	// ft_free(head);
 	// 
 
-
+typedef struct stack
+{
+	int	*p;
+	char *c;
+}stack;
+void	ft_change(stack *s)
+{
+	*s->p = 6;
+	s->c[0] = 'a';
+	s->c[1] = 's';
+	s->c[2] = '\0';
+	return ;
+}
 
 int main(void)
 {
-	int *p;
-	p = malloc(sizeof(int));
-	*p = 8;
-	printf("%d", *p);
+	stack *s;
+	s = malloc(sizeof(stack));
+	s->p = malloc(sizeof(int));
+	s->c = malloc(sizeof(char) * 3);
+	*s->p = 8;
+	ft_change(s);
+	printf("%d", *s->p);
+	printf("%s", s->c);
+	free(s->p);
+	free(s);
+
 }
