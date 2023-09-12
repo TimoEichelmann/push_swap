@@ -178,7 +178,7 @@ char	*ft_binconvert(int	num)
 	return (ft_bincalculator(num, pot, dec, bin));
 }
 
-void ft_initialize(stack_t *head, int argc)
+stack_t *ft_initialize(stack_t *head, int argc)
 {
 	stack_t	*p;
 	int		*sorted;
@@ -189,7 +189,7 @@ void ft_initialize(stack_t *head, int argc)
 	if (!sorted)
 	{
 		ft_free(head);
-		return ;
+		return NULL;
 	}
 	p = head;
 	while (p)
@@ -203,7 +203,7 @@ void ft_initialize(stack_t *head, int argc)
 		p = p->next;
 	}
 	free(sorted);
-	return ;
+	return (head);
 }
 
 stack_t	*ft_insert(int argc, char **argv)
@@ -223,8 +223,7 @@ stack_t	*ft_insert(int argc, char **argv)
         ft_lstadd_back(&head, p);
         i++;
     }
-	ft_initialize(head, argc);
-	if (!head)
+	if (!ft_initialize(head, argc))
 		return NULL;
     return (head);
 }
@@ -235,6 +234,11 @@ int main(int argc, char **argv)
 	stack_t *p;
 
 	head = ft_insert(argc, argv);
+	if (!head)
+	{
+		printf("%p", ft_insert(argc, argv));
+		return (0);
+	}
 	p = head;
 	while (p)
 	{
