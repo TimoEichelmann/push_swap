@@ -12,8 +12,8 @@
 
 typedef struct stack
 {
-	int				value;
-	int				position;
+	int				*value;
+	int				*position;
 	char			*binary;
 	struct stack*	next;
 }stack_t;
@@ -100,24 +100,82 @@ void    ft_bubblesort(int **arr, int argc)
     }
 }
 
-int	*ft_sort(stack_t *head, int argc)
+int	*ft_sort(stack_t *p, int argc)
 {
 	int	*result;
 	int	i;
 
 	i = 0;
 	result = malloc(sizeof(int) * (argc - 1));
-	while (head)
+	while (p)
 	{
-		result[i] = head->value;
-		head = head->next;
+		result[i] = *p->value;
+		p = p->next;
 		i++;
 	}
-	result[i] = '\0';
 	ft_bubblesort(&result, argc);
 	return (result);
 }
 
+char *ft_bincalculator(int num, int pot, int dec, char *bin)
+{
+	int	i;
+	int	rem;
+
+	i = 0;
+	bin = malloc((sizeof(char) * dec) + 1);
+	while (pot != 0)
+	{
+		rem = num % pot;
+		num = num / pot;
+		pot = pot / 2;
+		bin[i] = '0' + num;
+		dec--;
+		num = rem;
+		i++;
+	}
+	bin[i] = '\0';
+	return (bin);
+}
+char	*ft_binconvert(int	num)
+{
+	int pot;
+	int dec;
+	char *bin;
+
+	pot = 1;
+	dec = 1;
+	while (num / pot > 1)
+	{
+		pot = pot * 2;
+		dec++;
+	}
+	return (ft_bincalculator(num, pot, dec, bin));
+}
+
+int ft_initialize(stack_t *head, int argc)
+{
+	stack_t	*p;
+	int		*sorted;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	sorted = ft_sort(head, argc);
+	p = head;
+	while (p)
+	{
+		while (*p->value != sorted[i])
+			i++;
+		p->position = malloc(sizeof(int));
+		*p->position = i;
+		p->binary = ft_binconvert(*p->position);
+		i = 0;
+		p = p->next;
+	}
+	free(sorted);
+}
 stack_t	*ft_insert(int argc, char **argv)
 {
     int    i;
@@ -129,12 +187,14 @@ stack_t	*ft_insert(int argc, char **argv)
     while (i < argc)
     {
         p = malloc(sizeof(stack_t));
-        p->value = ft_atoi(argv[i]);
+		p->value = malloc(sizeof(int));
+        *p->value = ft_atoi(argv[i]);
         p->next = NULL;
         /*p->binary = ft_convert(p->value); */
         ft_lstadd_back(&head, p);
         i++;
     }
+	ft_initialize(head, argc);
     return (head);
 }
 
@@ -144,77 +204,38 @@ void ft_free(stack_t *head)
 	while (head)
 	{
 		p = head->next;
+		// free(head->value);
+		free(head->position);
+		free(head->binary);
 		free(head);
 		head = p;
 	}
 	return;
 }
 
-static int	ft_binlen(int nb)
-{
-	int	len;
 
-	len = 0;
-	while (nb)
-	{
-		nb = nb / 2;
-		len++;
-	}
-	return (len);
-}
-
-char	*ft_convert(int	num)
-{
-	char	*result;
-	int		size;
-
-	size = ft_binlen(num);
-	result = malloc(size + 1);
-	result[size] = '\0';
-	while (num)
-	{
-		size--;
-		result[size] = (num % 2) + 48;
-		num = num / 2;
-	}
-	return (result);
-}
 
 int main(int argc, char **argv)
 {
-	stack_t *head;
-	stack_t	*p;
-	int		*sorted;
-	int		i;
+	stack_t* head;
+	stack_t *p;
 
-	i = 0;
 	head = ft_insert(argc, argv);
-	sorted = ft_sort(head, argc);
 	p = head;
 	while (p)
 	{
-		while (p->value != sorted[i])
-			i++;
-		p->position = i;
-		// p->binary = ft_convert(p->position);
-		i = 0;
+		printf("val: %d\n", *p->value);
+		printf("position: %d\n", *p->position);
+		printf("bin: %s\n", p->binary);
 		p = p->next;
 	}
-	p = head;
-	while (p)
-	{
-		printf("%d\n", p->value);
-		p->binary = ft_convert(p->position);
-		p = p->next;
-	}
-	p = head;
-	while (p)
-	{
-		printf("%d\n", p->value);
-		printf("%d\n", p->position);
-		printf("%s\n", p->binary);
-		p = p->next;
-	}
-	free(sorted);
+	// p = head;
+	// while (p)
+	// {
+	// 	printf("%d\n", p->value);
+	// 	printf("%d\n", p->position);
+	// 	printf("%s\n", p->binary);
+	// 	p = p->next;
+	// }
 	ft_free(head);
 }

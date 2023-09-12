@@ -13,10 +13,11 @@
 #include <unistd.h>
 #include "push_swap.h"
 
-// int main(int argc, char** argv)
-// {
-// 	printf("%d", ft_checker(argc, argv));
-// }
+
+int main(int argc, char** argv)
+{
+	printf("%d", ft_checker(argc, argv));
+}
 
 int ft_checker(int argc, char** argv)
 {
@@ -100,21 +101,21 @@ int	ft_check_double(char **argv, char *str, int	argc)
 	int	i;
 	int indicator;
 
-	indicator = 0;
+	indicator = 1;
 	i = 1;
 	while (i < argc)
 	{
 		if (ft_strlen(str) == ft_strlen(argv[i]))
 		{
-			if (strcmp(str, argv[i]) == 0 && indicator < 2)
+			if (strcmp(str, argv[i]) != 0)
+				i++;
+			else
 			{
 				i++;
 				indicator++;
+				if (indicator > 2)
+					return (-1);
 			}
-			else if (strcmp(str, argv[i]) == 0 && indicator > 1)
-				return (-1);
-			else if (strcmp(str, argv[i]) != 0)
-				i++;
 		}
 		else
 			i++;

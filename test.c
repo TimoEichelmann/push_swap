@@ -1,14 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
-
-
-int main(void)
-{
-	printf("%s\n", ft_convert(6));
-}
-
 // void    ft_bubblesort(int **arr, int argc)
 // {
 //     int    i;
@@ -68,3 +60,12 @@ int main(void)
 	// ft_free(head);
 	// 
 
+
+
+int main(void)
+{
+	int *p;
+	p = malloc(sizeof(int));
+	*p = 8;
+	printf("%d", *p);
+}
