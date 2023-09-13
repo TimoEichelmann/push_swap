@@ -14,27 +14,33 @@
 #include <unistd.h>
 #include "push_swap.h"
 
-void	ft_sa(stack_t *stack_a)
+//call with stack_a for sa and stack_b for sb. For ss just call it twice with both
+void	ft_swap(stack_t **head)
 {
-	stack_t *next_a;
+	stack_t *stack;
+	stack_t *stack1;
+	stack_t *stack2;
 
-	next_a = stack_a->next;
-	if ((!stack_a)	||	(!next_a))
+	stack = *head;
+	stack1 = stack->next;
+	stack2 = stack1->next;
+	if (!*head || !stack1)
 		return ;
-	stack_a->next = next_a->next;
-	next_a->next = stack_a;
+	stack1->next = stack;
+	stack->next = stack2;
+	*head = stack1;
 }
 
-void	ft_sb(stack_t *stack_a, stack_t *stack_b)
+void	ft_pa(stack_t **stack_a, stack_t **stack_b)
 {
-	stack_t *next_a;
-	stack_t *next_b;
+	stack_t *afirst;
+	stack_t *bfirst;
 
-	if ((!stack_b && !stack_a)	||
-			(!stack_a || !stack_b))
+	if (!*stack_b)
 		return ;
-	next_a = stack_a->next;
-	next_b = stack_b->next;
-	stack_b->next = next_a;
-	stack_a->next = next_b;
+	afirst = *stack_a;
+	bfirst = *stack_b;
+	*stack_b = bfirst->next;
+	bfirst->next = afirst;
+	*stack_a = bfirst;
 }
