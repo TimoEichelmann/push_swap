@@ -62,29 +62,63 @@
 
 typedef struct stack
 {
-	int	*p;
-	char *c;
-}stack;
-void	ft_change(stack *s)
+	int				*value;
+	int				*position;
+	char			*binary;
+	struct stack*	next;
+}stack_t;
+
+void	ft_sa(stack_t **head)
 {
-	*s->p = 6;
-	s->c[0] = 'a';
-	s->c[1] = 's';
-	s->c[2] = '\0';
-	return ;
+	stack_t *stack;
+	stack_t *stack1;
+	stack_t *stack2;
+
+	stack = *head;
+	stack1 = stack->next;
+	stack2 = stack1->next;
+	if (!*head || !stack1)
+		return ;
+	stack1->next = stack;
+	stack->next = stack2;
+	*head = stack1;
 }
 
 int main(void)
 {
-	stack *s;
-	s = malloc(sizeof(stack));
-	s->p = malloc(sizeof(int));
-	s->c = malloc(sizeof(char) * 3);
-	*s->p = 8;
-	ft_change(s);
-	printf("%d", *s->p);
-	printf("%s", s->c);
-	free(s->p);
-	free(s);
+	stack_t *head;
+	stack_t *a;
+	stack_t *a1;
+	stack_t *a2;
 
+
+	a = malloc(sizeof(stack_t));
+	a1 = malloc(sizeof(stack_t));
+	a2 = malloc(sizeof(stack_t));
+	head = a;
+	a->next = a1;
+	a1->next = a2;
+	a2->next = NULL;
+	a->value = malloc(sizeof(int));
+	a1->value = malloc(sizeof(int));
+	a2->value = malloc(sizeof(int));
+	*a->value = 1;
+	*a1->value = 2;
+	*a2->value = 3;
+	while (head)
+	{
+		printf("%d\n", *head->value);
+		head = head->next;
+	}
+	head = a;
+	ft_sa(&head);
+	while (head)
+	{
+		printf("%d\n", *head->value);
+		head = head->next;
+	}
+	free(a->value);
+	free(a1->value);
+	free(a);
+	free(a1);
 }

@@ -187,10 +187,7 @@ stack_t *ft_initialize(stack_t *head, int argc)
 	i = 0;
 	sorted = ft_sort(head, argc);
 	if (!sorted)
-	{
-		ft_free(head);
 		return NULL;
-	}
 	p = head;
 	while (p)
 	{
@@ -199,6 +196,8 @@ stack_t *ft_initialize(stack_t *head, int argc)
 		p->position = malloc(sizeof(int));
 		*p->position = i;
 		p->binary = ft_binconvert(*p->position);
+		if (!p->position || !p->binary)
+			return (NULL);
 		i = 0;
 		p = p->next;
 	}
@@ -218,6 +217,8 @@ stack_t	*ft_insert(int argc, char **argv)
     {
         p = malloc(sizeof(stack_t));
 		p->value = malloc(sizeof(int));
+		if (!p || !p->value)
+			return (NULL);
         *p->value = ft_atoi(argv[i]);
         p->next = NULL;
         ft_lstadd_back(&head, p);
@@ -225,7 +226,7 @@ stack_t	*ft_insert(int argc, char **argv)
     }
 	if (!ft_initialize(head, argc))
 		return NULL;
-    return (head);
+	return (head);
 }
 
 int main(int argc, char **argv)
@@ -237,6 +238,7 @@ int main(int argc, char **argv)
 	if (!head)
 	{
 		printf("%p", ft_insert(argc, argv));
+		ft_free(head);
 		return (0);
 	}
 	p = head;

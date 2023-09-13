@@ -13,13 +13,16 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 // # include "libft/libft.h"
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
 
 typedef struct stack
 {
-    int		value;
-	int		position;
-    char    *binary;
-    struct	stack* next;
+	int				*value;
+	int				*position;
+	char			*binary;
+	struct stack*	next;
 }stack_t;
 
 int ft_checker(int argc, char** argv);
