@@ -1,59 +1,66 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include "push_swap.h"
 
-typedef struct stack
-{
-	int				*value;
-	int				*position;
-	char			*binary;
-	struct stack*	next;
-}stack_t;
+// void	ft_sort_big(stack_t **stack_a, stack_t **stack_b, int argc)
+// {
+// 	stack_t *ahead;
+// 	stack_t *bhead;
+// 	int		i;
+// 	int		j;
 
-stack_t	*ft_lstlast(stack_t *lst)
+// 	i = 0;
+// 	j = 0;
+// 	ahead = *stack_a;
+// 	bhead = *stack_b;
+// 	printf("%d\n", ft_strlen(ft_binconvert(argc)));
+// 	while (i < ft_strlen(ft_binconvert(argc)))
+// 	{
+// 		while (j < argc)
+// 		{
+// 			if (!ahead->value)
+// 				j++;
+// 			else
+// 			{
+// 				if (ahead->value[i] == '0')
+// 					ft_pb(&ahead, &bhead);
+// 				else
+// 					ft_ra(&ahead);
+// 				j++;
+// 			}
+// 		}
+// 		i++;
+// 		while (bhead)
+// 			ft_pa(&ahead, &bhead);
+// 	}
+// 	bhead = ahead;
+// 	while (ahead)
+// 	{
+// 		printf("value : %d\n", *ahead->value);
+// 		printf("binary : %s\n", ahead->binary);
+// 		ahead = ahead->next;
+// 	}
+// }
+
+int main(int	argc, char **argv)
 {
-	while (lst)
+	stack_t *stack_a;
+	stack_t *stack_b;
+	// int		i;
+	// i = 0;
+	printf("%d\n", argc);
+	stack_a = ft_insert(argc, argv);
+	// printf("a :%s\n", stack_a->binary);
+	// stack_b = stack_a->next;
+	// printf("b :%s\n", stack_b->binary);
+	// ft_sort_big(&stack_a, &stack_b, argc);
+	// if (stack_b->binary[i] == '0')
+	// 	printf("hello");
+	stack_b = stack_a;
+	while (stack_a)
 	{
-		if (!lst->next)
-			return (lst);
-		lst = lst->next;
+		printf("val :%d position : %d bin : %s\n", *stack_a->value, *stack_a->position, stack_a->binary);
+		stack_a = stack_a->next;
 	}
-	return (lst);
-}
-
-stack_t	*ft_lstsectolast(stack_t *lst)
-{
-	stack_t *next;
-
-	while (lst)
-	{
-		next = lst->next;
-		if (!next->next)
-			return (lst);
-		lst = lst->next;
-	}
-	return (lst);
-}
-
-int	ft_revrotate(stack_t	**stack)
-{
-	stack_t *lstlast;
-	stack_t	*lstsectolast;
-	stack_t *lstfirst;
-
-	lstfirst = *stack;
-	if (!*stack || !lstfirst->next)
-		return -1;
-	lstlast = ft_lstlast(*stack);
-	lstsectolast = ft_lstsectolast(*stack);
-	lstsectolast->next = lstlast->next;
-	lstlast->next = *stack;
-	*stack = lstlast;
-	return (0);
-}
-
-int main(void)
-{
-	stack_t *head;
-	head = NULL;
-	printf("%d", ft_revrotate(&head));
+	stack_a = stack_b;
+	ft_free(&stack_a);
+	ft_free(&stack_b);
 }

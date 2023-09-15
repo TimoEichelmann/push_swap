@@ -10,30 +10,22 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-typedef struct stack
-{
-	int				*value;
-	int				*position;
-	char			*binary;
-	struct stack*	next;
-}stack_t;
+#include "push_swap.h"
 
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
-// #include "push_swap.h"
-
-void ft_free(stack_t *head)
+void ft_free(stack_t **head)
 {
 	stack_t	*p;
-	while (head)
+	stack_t *h;
+
+	h = *head;
+	while (h)
 	{
-		p = head->next;
-		free(head->value);
-		free(head->position);
-		free(head->binary);
-		free(head);
-		head = p;
+		p = h->next;
+		free(h->value);
+		free(h->position);
+		free(h->binary);
+		free(h);
+		h = p;
 	}
 	return;
 }
@@ -98,7 +90,7 @@ int    ft_bubblesort(int **arr, int argc, int swi)
 
     i = 0;
     j = 0;
-    while (i < argc)
+    while (i < argc - 1)
     {
         while (j < (argc - i - 1))
         {
@@ -192,7 +184,10 @@ stack_t *ft_initialize(stack_t *head, int argc)
 	while (p)
 	{
 		while (*p->value != sorted[i])
+		{
+			printf("at i = %i sorted = %i\n", i, sorted[i]);
 			i++;
+		}
 		p->position = malloc(sizeof(int));
 		*p->position = i;
 		p->binary = ft_binconvert(*p->position);
@@ -205,6 +200,43 @@ stack_t *ft_initialize(stack_t *head, int argc)
 	return (head);
 }
 
+void	ft_strrev(char **string)
+{
+	int		i;
+	int		j;
+	char	temp;
+	char	*s;
+
+	i = 0;
+	s = *string;
+	j = ft_strlen(*string);
+	if (j == 1)
+		return;
+	else
+		while (i < j/2)
+		{
+			temp = s[i];
+			s[i] = s[j-i-1];
+			s[j-i-1] = temp;
+			i++;
+		}
+}
+
+stack_t	*ft_rev_bins(stack_t **list)
+{
+	stack_t *head;
+	stack_t *p;
+
+	head = *list;
+	p = *list;
+	while (p)
+	{
+		ft_strrev(&p->binary);
+		p = p->next;
+	}
+	return(head);
+}
+
 stack_t	*ft_insert(int argc, char **argv)
 {
     int    i;
@@ -212,7 +244,7 @@ stack_t	*ft_insert(int argc, char **argv)
     stack_t *p;
 
     i = 1;
-    head = NULL;
+	head = NULL;
     while (i < argc)
     {
         p = malloc(sizeof(stack_t));
@@ -226,36 +258,37 @@ stack_t	*ft_insert(int argc, char **argv)
     }
 	if (!ft_initialize(head, argc))
 		return NULL;
+	head = ft_rev_bins(&head);
 	return (head);
 }
 
-int main(int argc, char **argv)
-{
-	stack_t* head;
-	stack_t *p;
+// int main(int argc, char **argv)
+// {
+// 	stack_t* head;
+// 	stack_t *p;
 
-	head = ft_insert(argc, argv);
-	if (!head)
-	{
-		printf("%p", ft_insert(argc, argv));
-		ft_free(head);
-		return (0);
-	}
-	p = head;
-	while (p)
-	{
-		printf("val: %d\n", *p->value);
-		printf("position: %d\n", *p->position);
-		printf("bin: %s\n", p->binary);
-		p = p->next;
-	}
-	// p = head;
-	// while (p)
-	// {
-	// 	printf("%d\n", p->value);
-	// 	printf("%d\n", p->position);
-	// 	printf("%s\n", p->binary);
-	// 	p = p->next;
-	// }
-	ft_free(head);
-}
+// 	head = ft_insert(argc, argv);
+// 	if (!head)
+// 	{
+// 		printf("%p", ft_insert(argc, argv));
+// 		ft_free(head);
+// 		return (0);
+// 	}
+// 	p = head;
+// 	while (p)
+// 	{
+// 		printf("val: %d\n", *p->value);
+// 		printf("position: %d\n", *p->position);
+// 		printf("bin: %s\n", p->binary);
+// 		p = p->next;
+// 	}
+// 	// p = head;
+// 	// while (p)
+// 	// {
+// 	// 	printf("%d\n", p->value);
+// 	// 	printf("%d\n", p->position);
+// 	// 	printf("%s\n", p->binary);
+// 	// 	p = p->next;
+// 	// }
+// 	ft_free(head);
+// }
