@@ -14,8 +14,8 @@
 
 void	ft_sort_big(t_stack **stack_a, t_stack **stack_b, int argc)
 {
-	t_stack *ahead;
-	t_stack *bhead;
+	t_stack	*ahead;
+	t_stack	*bhead;
 	int		i;
 	int		j;
 
@@ -23,7 +23,6 @@ void	ft_sort_big(t_stack **stack_a, t_stack **stack_b, int argc)
 	j = 0;
 	ahead = *stack_a;
 	bhead = *stack_b;
-	printf("%p\n", *stack_a);
 	while (i < ft_strlen(ft_binconvert(argc - 1)))
 	{
 		while (j < argc - 1)
@@ -42,30 +41,12 @@ void	ft_sort_big(t_stack **stack_a, t_stack **stack_b, int argc)
 	}
 }
 
-int	ft_find_int(t_stack **stack_a, int find)
-{
-	int	i;
-	t_stack *ahead;
-	
-	ahead = *stack_a;
-	i = 0;
-	while (*ahead->position != find && ahead)
-	{
-		ahead = ahead->next;
-		i++;
-	}
-	if (!ahead && *ahead->position != i)
-		return (-1);
-	return (i);
-}
-
 int	ft_split_stack(t_stack **stack_a, t_stack **stack_b, int argc)
 {
-	t_stack *ahead;
-	t_stack *bhead;
+	t_stack	*ahead;
+	t_stack	*bhead;
 	int		pos;
 	int		j;
-
 
 	ahead = *stack_a;
 	bhead = *stack_b;
@@ -90,7 +71,7 @@ int	ft_split_stack(t_stack **stack_a, t_stack **stack_b, int argc)
 
 void	ft_sort_min(t_stack **stack_a)
 {
-	t_stack *ahead;
+	t_stack	*ahead;
 
 	ahead = *stack_a;
 	if (*ahead->position != 2 && ft_find_int(&ahead, 2) == 1)
@@ -107,10 +88,10 @@ void	ft_sort_min(t_stack **stack_a)
 	*stack_a = ahead;
 }
 
-void ft_sort_small(t_stack **stack_a, t_stack **stack_b, int argc)
+void	ft_sort_small(t_stack **stack_a, t_stack **stack_b, int argc)
 {
-	t_stack *ahead;
-	t_stack *bhead;
+	t_stack	*ahead;
+	t_stack	*bhead;
 	int		j;
 
 	ahead = *stack_a;
@@ -129,10 +110,10 @@ void ft_sort_small(t_stack **stack_a, t_stack **stack_b, int argc)
 	*stack_b = bhead;
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_stack *stack_a;
-	t_stack *stack_b;
+	t_stack	*stack_a;
+	t_stack	*stack_b;
 
 	if (ft_checker(argc, argv) != 0)
 		return (0);

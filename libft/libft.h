@@ -22,7 +22,7 @@ typedef struct stack
 	int				*value;
 	int				*position;
 	char			*binary;
-	struct stack*	next;
+	struct stack	*next;
 }t_stack;
 
 typedef struct s_list
@@ -76,14 +76,14 @@ char			*ft_strrchr(const char *s, int c);
 char			*ft_substr(const char *s, unsigned int start, unsigned int len);
 int				ft_tolower(int c);
 int				ft_toupper(int c);
-int			ft_printf(const char *p, ...);
-int			ft_format(const char *p, va_list args, int i, int result);
-int			ft_printchar(char c);
-int			ft_printstr(char *p);
-int			ft_unsigned_int(unsigned int i);
-int			ft_int(int i);
-int			ft_void_pointer(void *p);
-int			ft_hexconverter_long(unsigned long long int h);
-int			ft_hexconverter(unsigned int h, const char *p, int u);
-int			ft_hexadecimal_len(unsigned int h);
+int				ft_printf(const char *p, ...);
+int				ft_format(const char *p, va_list args, int i, int result);
+int				ft_printchar(char c);
+int				ft_printstr(char *p);
+int				ft_unsigned_int(unsigned int i);
+int				ft_int(int i);
+int				ft_void_pointer(void *p);
+int				ft_hexconverter_long(unsigned long long int h);
+int				ft_hexconverter(unsigned int h, const char *p, int u);
+int				ft_hexadecimal_len(unsigned int h);
 #endif
