@@ -13,9 +13,9 @@
 #include "push_swap.h"
 
 //ADD TO LIBFT!!!!!
-stack_t	*ft_lstsectolast(stack_t *lst)
+t_stack	*ft_lstsectolast(t_stack *lst)
 {
-	stack_t *next;
+	t_stack *next;
 
 	while (lst)
 	{
@@ -29,11 +29,11 @@ stack_t	*ft_lstsectolast(stack_t *lst)
 
 
 //call with stack_a for sa and stack_b for sb. For ss just call it twice with both
-void	ft_sa(stack_t **head)
+void	ft_sa(t_stack **head)
 {
-	stack_t *stack;
-	stack_t *stack1;
-	stack_t *stack2;
+	t_stack *stack;
+	t_stack *stack1;
+	t_stack *stack2;
 
 	stack = *head;
 	stack1 = stack->next;
@@ -43,14 +43,14 @@ void	ft_sa(stack_t **head)
 	stack1->next = stack;
 	stack->next = stack2;
 	*head = stack1;
-	printf("%s\n", "sa");
+	ft_printf("%s\n", "sa");
 }
 
-void	ft_sb(stack_t **head)
+void	ft_sb(t_stack **head)
 {
-	stack_t *stack;
-	stack_t *stack1;
-	stack_t *stack2;
+	t_stack *stack;
+	t_stack *stack1;
+	t_stack *stack2;
 
 	stack = *head;
 	stack1 = stack->next;
@@ -60,20 +60,20 @@ void	ft_sb(stack_t **head)
 	stack1->next = stack;
 	stack->next = stack2;
 	*head = stack1;
-	printf("%s\n", "sb");
+	ft_printf("%s\n", "sb");
 }
 
-void	ft_ss(stack_t **stack_a, stack_t **stack_b)
+void	ft_ss(t_stack **stack_a, t_stack **stack_b)
 {
 	ft_sa(stack_a);
 	ft_sb(stack_b);
-	printf("%s\n", "ss");
+	ft_printf("%s\n", "ss");
 }
 
-void	ft_pa(stack_t **stack_a, stack_t **stack_b)
+void	ft_pa(t_stack **stack_a, t_stack **stack_b)
 {
-	stack_t *afirst;
-	stack_t *bfirst;
+	t_stack *afirst;
+	t_stack *bfirst;
 
 	if (!*stack_b)
 		return ;
@@ -82,13 +82,13 @@ void	ft_pa(stack_t **stack_a, stack_t **stack_b)
 	*stack_b = bfirst->next;
 	bfirst->next = afirst;
 	*stack_a = bfirst;
-	printf("%s\n", "pa");
+	ft_printf("%s\n", "pa");
 }
 
-void	ft_pb(stack_t **stack_a, stack_t **stack_b)
+void	ft_pb(t_stack **stack_a, t_stack **stack_b)
 {
-	stack_t *afirst;
-	stack_t *bfirst;
+	t_stack *afirst;
+	t_stack *bfirst;
 
 	if (!*stack_a)
 		return ;
@@ -97,13 +97,13 @@ void	ft_pb(stack_t **stack_a, stack_t **stack_b)
 	*stack_a = afirst->next;
 	afirst->next = bfirst;
 	*stack_b = afirst;
-	printf("%s\n", "pb");
+	ft_printf("%s\n", "pb");
 }
 
-void	ft_ra(stack_t	**stack)
+void	ft_ra(t_stack	**stack)
 {
-	stack_t *lstlast;
-	stack_t	*lstfirst;
+	t_stack *lstlast;
+	t_stack	*lstfirst;
 
 	lstlast = ft_lstlast(*stack);
 	lstfirst = *stack;
@@ -112,13 +112,13 @@ void	ft_ra(stack_t	**stack)
 	*stack = lstfirst->next;
 	lstfirst->next = lstlast->next;
 	lstlast->next = lstfirst;
-	printf("%s\n", "ra");
+	ft_printf("%s\n", "ra");
 }
 
-void	ft_rb(stack_t	**stack)
+void	ft_rb(t_stack	**stack)
 {
-	stack_t *lstlast;
-	stack_t	*lstfirst;
+	t_stack *lstlast;
+	t_stack	*lstfirst;
 
 	lstlast = ft_lstlast(*stack);
 	lstfirst = *stack;
@@ -127,21 +127,21 @@ void	ft_rb(stack_t	**stack)
 	*stack = lstfirst->next;
 	lstfirst->next = lstlast->next;
 	lstlast->next = lstfirst;
-	printf("%s\n", "rb");
+	ft_printf("%s\n", "rb");
 }
 
-void	ft_rr(stack_t **stack_a, stack_t **stack_b)
+void	ft_rr(t_stack **stack_a, t_stack **stack_b)
 {
 	ft_ra(stack_a);
 	ft_rb(stack_b);
-	printf("%s\n", "rr");
+	ft_printf("%s\n", "rr");
 }
 
-void	ft_rra(stack_t	**stack)
+void	ft_rra(t_stack	**stack)
 {
-	stack_t *lstlast;
-	stack_t	*lstsectolast;
-	stack_t *lstfirst;
+	t_stack *lstlast;
+	t_stack	*lstsectolast;
+	t_stack *lstfirst;
 
 	lstfirst = *stack;
 	if (!*stack || !lstfirst->next)
@@ -151,14 +151,14 @@ void	ft_rra(stack_t	**stack)
 	lstsectolast->next = lstlast->next;
 	lstlast->next = *stack;
 	*stack = lstlast;
-	printf("%s\n", "rra");
+	ft_printf("%s\n", "rra");
 }
 
-void	ft_rrb(stack_t	**stack)
+void	ft_rrb(t_stack	**stack)
 {
-	stack_t *lstlast;
-	stack_t	*lstsectolast;
-	stack_t *lstfirst;
+	t_stack *lstlast;
+	t_stack	*lstsectolast;
+	t_stack *lstfirst;
 
 	lstfirst = *stack;
 	if (!*stack || !lstfirst->next)
@@ -168,14 +168,14 @@ void	ft_rrb(stack_t	**stack)
 	lstsectolast->next = lstlast->next;
 	lstlast->next = *stack;
 	*stack = lstlast;
-	printf("%s\n", "rrb");
+	ft_printf("%s\n", "rrb");
 }
 
-void	ft_rrr(stack_t **stack_a, stack_t **stack_b)
+void	ft_rrr(t_stack **stack_a, t_stack **stack_b)
 {
 	ft_rra(stack_a);
 	ft_rrb(stack_b);
-	printf("%s\n", "rrr");
+	ft_printf("%s\n", "rrr");
 }
 
 

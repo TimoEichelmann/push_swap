@@ -56,44 +56,44 @@ int	ft_digit_check(char *argv)
 	return (0);
 }
 
-int	ft_strcmp(char *s1, char *s2)
-{
-	unsigned int	i;
+// int	ft_strcmp(char *s1, char *s2)
+// {
+// 	unsigned int	i;
 
-	i = 0;
-	while ((unsigned char)s1[i] && (unsigned char)s2[i])
-	{
-		if ((unsigned char)s1[i] != (unsigned char)s2[i])
-		{
-			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-		}
-		i++;
-	}
-	if ((unsigned char)s1[i] == (unsigned char)s2[i])
-		return (0);
-	else
-		return (-1);
-}
+// 	i = 0;
+// 	while ((unsigned char)s1[i] && (unsigned char)s2[i])
+// 	{
+// 		if ((unsigned char)s1[i] != (unsigned char)s2[i])
+// 		{
+// 			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+// 		}
+// 		i++;
+// 	}
+// 	if ((unsigned char)s1[i] == (unsigned char)s2[i])
+// 		return (0);
+// 	else
+// 		return (-1);
+// }
 
-int	ft_strlen(const char *a)
-{
-	int	i;
+// int	ft_strlen(const char *a)
+// {
+// 	int	i;
 
-	i = 0;
-	while (a[i] != '\0')
-	{
-		i++;
-	}
-	return (i);
-}
+// 	i = 0;
+// 	while (a[i] != '\0')
+// 	{
+// 		i++;
+// 	}
+// 	return (i);
+// }
 
-int	ft_isdigit(int a)
-{
-	if (a >= '0' && a <= '9')
-		return (1);
-	else
-		return (0);
-}
+// int	ft_isdigit(int a)
+// {
+// 	if (a >= '0' && a <= '9')
+// 		return (1);
+// 	else
+// 		return (0);
+// }
 
 int	ft_check_double(char **argv, char *str, int	argc)
 {
@@ -121,31 +121,3 @@ int	ft_check_double(char **argv, char *str, int	argc)
 	}
 	return (0);
 }
-
-// int	ft_atoi(const char *p)
-// {
-// 	int	i;
-// 	int	result;
-// 	int	sign;
-
-// 	sign = 1;
-// 	result = 0;
-// 	i = 0;
-// 	while (p[i] == ' ' || p[i] == '\f' || p[i] == '\n' || p[i] == '\r'
-// 		|| p[i] == '\t' || p[i] == '\v')
-// 		i++;
-// 	if (p[i + 1] >= '0' && p[i + 1] <= '9' && (p[i] == '-' || p[i] == '+'))
-// 	{
-// 		if (p[i] == '-')
-// 			sign = -1;
-// 		i++;
-// 	}
-// 	else if ((p[i] == '-' || p[i] == '+') && !(p[i + 1] >= '0' && p[i] <= '9'))
-// 		return (0);
-// 	while (p[i] >= '0' && p[i] <= '9')
-// 	{
-// 		result = result * 10 + (p[i] - '0');
-// 		i++;
-// 	}
-// 	return (result * sign);
-// }

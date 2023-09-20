@@ -12,10 +12,10 @@
 
 #include "push_swap.h"
 
-void ft_free(stack_t **head)
+void ft_free(t_stack **head)
 {
-	stack_t	*p;
-	stack_t *h;
+	t_stack	*p;
+	t_stack *h;
 
 	h = *head;
 	while (h)
@@ -30,57 +30,57 @@ void ft_free(stack_t **head)
 	return;
 }
 
-int	ft_atoi(const char *p)
-{
-	int	i;
-	int	result;
-	int	sign;
+// int	ft_atoi(const char *p)
+// {
+// 	int	i;
+// 	int	result;
+// 	int	sign;
 
-	sign = 1;
-	result = 0;
-	i = 0;
-	while (p[i] == ' ' || p[i] == '\f' || p[i] == '\n' || p[i] == '\r'
-		|| p[i] == '\t' || p[i] == '\v')
-		i++;
-	if (p[i + 1] >= '0' && p[i + 1] <= '9' && (p[i] == '-' || p[i] == '+'))
-	{
-		if (p[i] == '-')
-			sign = -1;
-		i++;
-	}
-	else if ((p[i] == '-' || p[i] == '+') && !(p[i + 1] >= '0' && p[i] <= '9'))
-		return (0);
-	while (p[i] >= '0' && p[i] <= '9')
-	{
-		result = result * 10 + (p[i] - '0');
-		i++;
-	}
-	return (result * sign);
-}
+// 	sign = 1;
+// 	result = 0;
+// 	i = 0;
+// 	while (p[i] == ' ' || p[i] == '\f' || p[i] == '\n' || p[i] == '\r'
+// 		|| p[i] == '\t' || p[i] == '\v')
+// 		i++;
+// 	if (p[i + 1] >= '0' && p[i + 1] <= '9' && (p[i] == '-' || p[i] == '+'))
+// 	{
+// 		if (p[i] == '-')
+// 			sign = -1;
+// 		i++;
+// 	}
+// 	else if ((p[i] == '-' || p[i] == '+') && !(p[i + 1] >= '0' && p[i] <= '9'))
+// 		return (0);
+// 	while (p[i] >= '0' && p[i] <= '9')
+// 	{
+// 		result = result * 10 + (p[i] - '0');
+// 		i++;
+// 	}
+// 	return (result * sign);
+// }
 
-stack_t	*ft_lstlast(stack_t *lst)
-{
-	while (lst)
-	{
-		if (!lst->next)
-			return (lst);
-		lst = lst->next;
-	}
-	return (lst);
-}
+// t_stack	*ft_lstlast(t_stack *lst)
+// {
+// 	while (lst)
+// 	{
+// 		if (!lst->next)
+// 			return (lst);
+// 		lst = lst->next;
+// 	}
+// 	return (lst);
+// }
 
-void	ft_lstadd_back(stack_t **lst, stack_t *new)
-{
-	stack_t	*last;
+// void	ft_lstadd_back(t_stack **lst, t_stack *new)
+// {
+// 	t_stack	*last;
 
-	if (*lst && lst)
-	{
-		last = ft_lstlast(*lst);
-		last->next = new;
-	}
-	else
-		*lst = new;
-}
+// 	if (*lst && lst)
+// 	{
+// 		last = ft_lstlast(*lst);
+// 		last->next = new;
+// 	}
+// 	else
+// 		*lst = new;
+// }
 
 int    ft_bubblesort(int **arr, int argc, int swi)
 {
@@ -109,12 +109,14 @@ int    ft_bubblesort(int **arr, int argc, int swi)
 	return (swi);
 }
 
-int	*ft_sort(stack_t *p, int argc)
+int	*ft_sort(t_stack **arr, int argc)
 {
 	int	*result;
 	int	i;
 	int swi;
+	t_stack *p;
 
+	p = *arr;
 	i = 0;
 	swi = 0;
 	result = malloc(sizeof(int) * (argc - 1));
@@ -170,24 +172,21 @@ char	*ft_binconvert(int	num)
 	return (ft_bincalculator(num, pot, dec, bin));
 }
 
-stack_t *ft_initialize(stack_t *head, int argc)
+t_stack *ft_initialize(t_stack *head, int argc)
 {
-	stack_t	*p;
+	t_stack	*p;
 	int		*sorted;
 	int		i;
 
 	i = 0;
-	sorted = ft_sort(head, argc);
+	sorted = ft_sort(&head, argc - 1);
 	if (!sorted)
 		return NULL;
 	p = head;
 	while (p)
 	{
 		while (*p->value != sorted[i])
-		{
-			printf("at i = %i sorted = %i\n", i, sorted[i]);
 			i++;
-		}
 		p->position = malloc(sizeof(int));
 		*p->position = i;
 		p->binary = ft_binconvert(*p->position);
@@ -222,10 +221,10 @@ void	ft_strrev(char **string)
 		}
 }
 
-stack_t	*ft_rev_bins(stack_t **list)
+t_stack	*ft_rev_bins(t_stack **list)
 {
-	stack_t *head;
-	stack_t *p;
+	t_stack *head;
+	t_stack *p;
 
 	head = *list;
 	p = *list;
@@ -237,17 +236,17 @@ stack_t	*ft_rev_bins(stack_t **list)
 	return(head);
 }
 
-stack_t	*ft_insert(int argc, char **argv)
+t_stack	*ft_insert(int argc, char **argv)
 {
     int    i;
-    stack_t *head;
-    stack_t *p;
+    t_stack *head;
+    t_stack *p;
 
     i = 1;
 	head = NULL;
     while (i < argc)
     {
-        p = malloc(sizeof(stack_t));
+        p = malloc(sizeof(t_stack));
 		p->value = malloc(sizeof(int));
 		if (!p || !p->value)
 			return (NULL);
@@ -264,8 +263,8 @@ stack_t	*ft_insert(int argc, char **argv)
 
 // int main(int argc, char **argv)
 // {
-// 	stack_t* head;
-// 	stack_t *p;
+// 	t_stack* head;
+// 	t_stack *p;
 
 // 	head = ft_insert(argc, argv);
 // 	if (!head)
