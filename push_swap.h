@@ -43,6 +43,7 @@ int     ft_check_double(char **argv, char *str, int	argc);
 int     ft_checker(int argc, char** argv);
 int     main(int argc, char **argv);
 int     ft_digit_check(char *argv);
+int     ft_strcmp(char *s1, char *s2);
 
 // int     ft_strlen(const char *a);
 // void	ft_lstadd_back(t_stack **lst, t_stack *new);
@@ -50,6 +51,5 @@ int     ft_digit_check(char *argv);
 // int     ft_atoi(const char *p);
 // int     ft_isdigit(int a);
 // int     ft_strlen(const char *a);
-// int     ft_strcmp(char *s1, char *s2);
 // int     ft_digit_check(char *argv);
 #endif

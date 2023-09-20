@@ -56,24 +56,24 @@ int	ft_digit_check(char *argv)
 	return (0);
 }
 
-// int	ft_strcmp(char *s1, char *s2)
-// {
-// 	unsigned int	i;
+int	ft_strcmp(char *s1, char *s2)
+{
+	unsigned int	i;
 
-// 	i = 0;
-// 	while ((unsigned char)s1[i] && (unsigned char)s2[i])
-// 	{
-// 		if ((unsigned char)s1[i] != (unsigned char)s2[i])
-// 		{
-// 			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-// 		}
-// 		i++;
-// 	}
-// 	if ((unsigned char)s1[i] == (unsigned char)s2[i])
-// 		return (0);
-// 	else
-// 		return (-1);
-// }
+	i = 0;
+	while ((unsigned char)s1[i] && (unsigned char)s2[i])
+	{
+		if ((unsigned char)s1[i] != (unsigned char)s2[i])
+		{
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		}
+		i++;
+	}
+	if ((unsigned char)s1[i] == (unsigned char)s2[i])
+		return (0);
+	else
+		return (-1);
+}
 
 // int	ft_strlen(const char *a)
 // {
@@ -106,7 +106,7 @@ int	ft_check_double(char **argv, char *str, int	argc)
 	{
 		if (ft_strlen(str) == ft_strlen(argv[i]))
 		{
-			if (strcmp(str, argv[i]) != 0)
+			if (ft_strcmp(str, argv[i]) != 0)
 				i++;
 			else
 			{
