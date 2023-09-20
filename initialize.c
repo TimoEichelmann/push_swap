@@ -49,7 +49,9 @@ int	*ft_sort(t_stack **arr, int argc)
 	p = *arr;
 	i = 0;
 	swi = 0;
-	result = malloc(sizeof(int) * (argc - 1));
+	result = malloc(sizeof(int) * (argc));
+	if (!result)
+		return (NULL);
 	while (p)
 	{
 		result[i] = *p->value;
@@ -72,6 +74,8 @@ char	*ft_bincalculator(int num, int pot, int dec, char *bin)
 
 	i = 0;
 	bin = malloc((sizeof(char) * dec) + 1);
+	if (!bin)
+		return (NULL);
 	while (pot != 0)
 	{
 		rem = num % pot;

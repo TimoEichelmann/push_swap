@@ -52,3 +52,18 @@ int	ft_find_int(t_stack **stack_a, int find)
 		return (-1);
 	return (i);
 }
+
+int		ft_binlen(int num)
+{
+	int		pot;
+	int		dec;
+
+	pot = 1;
+	dec = 1;
+	while (num / pot > 1)
+	{
+		pot = pot * 2;
+		dec++;
+	}
+	return (dec);
+}

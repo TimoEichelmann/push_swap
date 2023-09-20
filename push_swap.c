@@ -23,7 +23,7 @@ void	ft_sort_big(t_stack **stack_a, t_stack **stack_b, int argc)
 	j = 0;
 	ahead = *stack_a;
 	bhead = *stack_b;
-	while (i < ft_strlen(ft_binconvert(argc - 1)))
+	while (i < ft_binlen(argc - 1))
 	{
 		while (j < argc - 1)
 		{

@@ -44,6 +44,13 @@ int		ft_checker(int argc, char **argv);
 int		main(int argc, char **argv);
 int		ft_digit_check(char *argv);
 int		ft_strcmp(char *s1, char *s2);
+void	ft_sort_big(t_stack **stack_a, t_stack **stack_b, int argc);
+int		ft_split_stack(t_stack **stack_a, t_stack **stack_b, int argc);
+void	ft_sort_min(t_stack **stack_a);
+void	ft_sort_small(t_stack **stack_a, t_stack **stack_b, int argc);
+int		main(int argc, char **argv);
+int		ft_find_int(t_stack **stack_a, int find);
+int		ft_binlen(int num);
 
 // int     ft_strlen(const char *a);
 // void	ft_lstadd_back(t_stack **lst, t_stack *new);

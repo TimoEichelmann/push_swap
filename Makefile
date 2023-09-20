@@ -11,13 +11,13 @@
 # **************************************************************************** #
 
 NAME = push_swap
-SRC = check.c insert.c operations.c push_swap.c
-OBJ = check.o insert.o operations.o push_swap.o
+SRC = check.c insert.c initialize.c operations1.c operations2.c operations3_and_find_int.c push_swap.c
+OBJ = check.o insert.o initialize.o operations1.o operations2.o operations3_and_find_int.o push_swap.o
 LIBFT_OBJS = libft.a
 
 all : $(NAME)
 $(NAME) : $(OBJ) $(LIBFT_OBJS)
-	cc -Wall -Werror -Wextra -Lft -o push_swap $(OBJ) $(LIBFT_OBJS)
+	gcc -g -O1 -Wall -Werror -Wextra -Lft -o push_swap $(OBJ) $(LIBFT_OBJS)
 $(OBJ) : $(SRC)
 	cc -c -Wall -Werror -Wextra $(SRC)
 $(LIBFT_OBJS):
