@@ -27,7 +27,7 @@ void	ft_sort_big(t_stack **stack_a, t_stack **stack_b, int argc)
 	{
 		while (j < argc - 1)
 		{
-			if (ahead->binary[i] == '0' || i > ft_strlen(ahead->binary) - 1)
+			if (i > ft_strlen(ahead->binary) - 1 || ahead->binary[i] == '0')
 				ft_pb(&ahead, &bhead);
 			else
 				ft_ra(&ahead);
@@ -121,7 +121,7 @@ int	main(int argc, char **argv)
 	if (!stack_a)
 		return (0);
 	stack_b = NULL;
-	if (argc > 6)
+	if (argc > 51)
 		ft_sort_big(&stack_a, &stack_b, argc);
 	else
 		ft_sort_small(&stack_a, &stack_b, argc - 2);

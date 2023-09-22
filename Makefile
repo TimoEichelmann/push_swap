@@ -17,7 +17,7 @@ LIBFT_OBJS = libft.a
 
 all : $(NAME)
 $(NAME) : $(OBJ) $(LIBFT_OBJS)
-	gcc -g -O1 -Wall -Werror -Wextra -Lft -o push_swap $(OBJ) $(LIBFT_OBJS)
+	cc -Wall -Werror -Wextra -Lft -o push_swap $(OBJ) $(LIBFT_OBJS)
 $(OBJ) : $(SRC)
 	cc -c -Wall -Werror -Wextra $(SRC)
 $(LIBFT_OBJS):
