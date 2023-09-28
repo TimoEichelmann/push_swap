@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operations3.c                                      :+:      :+:    :+:   */
+/*   operations3_and_find_int.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: teichelm <teichelm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 13:18:27 by marvin            #+#    #+#             */
-/*   Updated: 2023/09/20 13:18:27 by marvin           ###   ########.fr       */
+/*   Updated: 2023/09/25 14:04:47 by teichelm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	ft_find_int(t_stack **stack_a, int find)
 	return (i);
 }
 
-int		ft_binlen(int num)
+int	ft_binlen(int num)
 {
 	int		pot;
 	int		dec;

@@ -43,7 +43,7 @@ int	ft_digit_check(char *argv)
 		return (-1);
 	while (i < ft_strlen(argv))
 	{
-		if (ft_isdigit(argv[i]) == 1)
+		if (ft_isdigit(argv[i]) == 1 || (i == 0 && argv[i] == '-'))
 			i++;
 		else
 			return (-1);
