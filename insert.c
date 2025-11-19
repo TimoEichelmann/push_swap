@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   insert.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: teichelm <teichelm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 00:18:15 by marvin            #+#    #+#             */
-/*   Updated: 2023/05/09 00:18:15 by marvin           ###   ########.fr       */
+/*   Updated: 2023/09/28 19:34:55 by teichelm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_free(t_stack **head)
+void	ft_free(t_stack **head, int i)
 {
 	t_stack	*p;
 	t_stack	*h;
@@ -22,8 +22,11 @@ void	ft_free(t_stack **head)
 	{
 		p = h->next;
 		free(h->value);
-		free(h->position);
-		free(h->binary);
+		if (i != 1)
+		{
+			free(h->position);
+			free(h->binary);
+		}
 		free(h);
 		h = p;
 	}
@@ -88,8 +91,8 @@ t_stack	*ft_insert(int argc, char **argv)
 		ft_lstadd_back(&head, p);
 		i++;
 	}
-	if (!ft_initialize(head, argc))
-		return (NULL);
-	head = ft_rev_bins(&head);
-	return (head);
+	if (ft_initialize(head, argc))
+		return (ft_rev_bins(&head));
+	ft_free(&head, 1);
+	return (NULL);
 }

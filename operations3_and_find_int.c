@@ -6,7 +6,7 @@
 /*   By: teichelm <teichelm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 13:18:27 by marvin            #+#    #+#             */
-/*   Updated: 2023/09/25 14:04:47 by teichelm         ###   ########.fr       */
+/*   Updated: 2023/09/28 19:33:03 by teichelm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ int	ft_find_int(t_stack **stack_a, int find)
 
 	ahead = *stack_a;
 	i = 0;
-	while (*ahead->position != find && ahead)
+	while (ahead && *ahead->position != find)
 	{
 		ahead = ahead->next;
 		i++;
 	}
-	if (!ahead && *ahead->position != i)
+	if (!ahead)
 		return (-1);
 	return (i);
 }
@@ -66,4 +66,31 @@ int	ft_binlen(int num)
 		dec++;
 	}
 	return (dec);
+}
+
+int	ft_bubblesort_char(char **arr, int argc, int swi)
+{
+	int	i;
+	int	j;
+	int	tmp;
+
+	i = 0;
+	j = 0;
+	while (i < argc - 1)
+	{
+		while (j < (argc - i - 1))
+		{
+			if (*(*arr + j) > *(*arr + (j + 1)))
+			{
+				tmp = *(*arr + j);
+				*(*arr + j) = *(*arr + (j + 1));
+				*(*arr + (j + 1)) = tmp;
+				swi++;
+			}
+			j++;
+		}
+		i++;
+		j = 0;
+	}
+	return (swi);
 }

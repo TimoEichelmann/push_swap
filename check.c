@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: teichelm <teichelm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:20:35 by marvin            #+#    #+#             */
-/*   Updated: 2023/05/05 13:20:35 by marvin           ###   ########.fr       */
+/*   Updated: 2023/10/04 17:11:27 by teichelm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,16 @@ int	ft_digit_check(char *argv)
 	int	i;
 
 	i = 0;
-	if (ft_strlen(argv) > 10)
+	if (ft_strlen(argv) > 10 && argv[0] != '-')
 		return (-1);
 	if ((ft_atoi(argv) < 0 && argv[0] != '-')
 		|| (ft_atoi(argv) > 0 && argv[0] == '-'))
 		return (-1);
 	while (i < ft_strlen(argv))
 	{
-		if (ft_isdigit(argv[i]) == 1 || (i == 0 && argv[i] == '-'))
+		if (ft_isdigit(argv[i]) == 1 || 
+			((i == 0 && argv[i] == '-' && argv[i + 1]) 
+				|| (i == 0 && argv[i] == '+' && argv[i + 1])))
 			i++;
 		else
 			return (-1);

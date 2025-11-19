@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: teichelm <teichelm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 18:54:18 by marvin            #+#    #+#             */
-/*   Updated: 2023/03/25 18:54:18 by marvin           ###   ########.fr       */
+/*   Updated: 2023/09/28 19:35:11 by teichelm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*ft_binconvert(int num);
 char	*ft_bincalculator(int num, int pot, int dec, char *bin);
 int		*ft_sort(t_stack **p, int argc);
 int		ft_bubblesort(int **arr, int argc, int swi);
-void	ft_free(t_stack **head);
+void	ft_free(t_stack **head, int i);
 int		ft_check_double(char **argv, char *str, int argc);
 int		ft_checker(int argc, char **argv);
 int		main(int argc, char **argv);

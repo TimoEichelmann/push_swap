@@ -6,7 +6,7 @@
 /*   By: teichelm <teichelm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 00:18:43 by marvin            #+#    #+#             */
-/*   Updated: 2023/09/26 16:10:23 by teichelm         ###   ########.fr       */
+/*   Updated: 2023/09/28 19:35:18 by teichelm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,6 @@ int	main(int argc, char **argv)
 		ft_sort_big(&stack_a, &stack_b, argc);
 	else
 		ft_sort_small(&stack_a, &stack_b, argc - 2);
-	ft_free(&stack_a);
-	ft_free(&stack_b);
+	ft_free(&stack_a, 0);
+	ft_free(&stack_b, 0);
 }
