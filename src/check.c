@@ -6,11 +6,11 @@
 /*   By: teichelm <teichelm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:20:35 by marvin            #+#    #+#             */
-/*   Updated: 2023/10/04 17:11:27 by teichelm         ###   ########.fr       */
+/*   Updated: 2025/11/19 14:30:31 by teichelm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../inc/push_swap.h"
 
 int	ft_checker(int argc, char	**argv)
 {

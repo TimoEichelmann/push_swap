@@ -6,11 +6,12 @@
 /*   By: teichelm <teichelm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 13:18:27 by marvin            #+#    #+#             */
-/*   Updated: 2023/09/28 19:33:03 by teichelm         ###   ########.fr       */
+/*   Updated: 2025/11/19 14:30:54 by teichelm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../inc/push_swap.h"
+
 
 void	ft_rrb(t_stack	**stack)
 {

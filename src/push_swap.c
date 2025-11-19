@@ -6,11 +6,12 @@
 /*   By: teichelm <teichelm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 00:18:43 by marvin            #+#    #+#             */
-/*   Updated: 2023/09/28 19:35:18 by teichelm         ###   ########.fr       */
+/*   Updated: 2025/11/19 14:31:07 by teichelm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../inc/push_swap.h"
+
 
 void	ft_sort_big(t_stack **stack_a, t_stack **stack_b, int argc)
 {
